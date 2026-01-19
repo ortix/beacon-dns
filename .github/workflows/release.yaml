@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build App
+      run: |
+        chmod +x build_app.sh
+        ./build_app.sh
+
+    - name: Create DMG
+      run: |
+        hdiutil create -volname "BeaconDNS" -srcfolder BeaconDNS.app -ov -format UDZO BeaconDNS.dmg
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: BeaconDNS.dmg
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
