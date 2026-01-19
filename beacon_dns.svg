@@ -1,39 +1,31 @@
-<svg width="1024" height="1024" viewBox="0 0 1024 1024"
-     xmlns="http://www.w3.org/2000/svg">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Beacon DNS – macOS App Icon SVG (Refined for icns generation)
+Fixes:
+- Explicit rounded-rect background (macOS app icon style)
+- Removed blur/glow (causes mushy rasterization at small sizes)
+- Simplified strokes so Finder downscaling stays crisp
+-->
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- macOS-style blue gradient -->
+    <!-- macOS system-blue inspired gradient -->
     <linearGradient id="beaconGradient" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#5AC8FA"/>
-      <stop offset="100%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#0A84FF"/>
     </linearGradient>
-
-    <!-- Subtle glow for central beacon -->
-    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="16" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
 
-  <!-- Transparent background (icon mask applied by macOS) -->
-  <rect width="1024" height="1024" rx="220" fill="none"/>
+  <!-- App icon background (Big Sur+ style) -->
+  <rect x="64" y="64" width="896" height="896" rx="200" fill="#F2F2F7"/>
 
-  <!-- Beacon waves -->
-  <g stroke="url(#beaconGradient)"
-     stroke-width="32"
-     fill="none"
-     opacity="0.85">
-    <circle cx="512" cy="512" r="140"/>
-    <circle cx="512" cy="512" r="260" opacity="0.55"/>
-    <circle cx="512" cy="512" r="380" opacity="0.3"/>
+  <!-- Beacon mark -->
+  <g transform="translate(512 512)">
+    <!-- mDNS broadcast rings -->
+    <circle r="300" stroke="url(#beaconGradient)" stroke-width="40" opacity="0.25" fill="none"/>
+    <circle r="210" stroke="url(#beaconGradient)" stroke-width="40" opacity="0.45" fill="none"/>
+    <circle r="120" stroke="url(#beaconGradient)" stroke-width="40" opacity="0.75" fill="none"/>
+
+    <!-- Core beacon dot -->
+    <circle r="72" fill="url(#beaconGradient)"/>
   </g>
-
-  <!-- Central beacon -->
-  <circle cx="512" cy="512" r="60"
-          fill="url(#beaconGradient)"
-          filter="url(#glow)"/>
-
 </svg>
