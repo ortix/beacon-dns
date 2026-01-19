@@ -1,0 +1,39 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <!-- macOS-style blue gradient -->
+    <linearGradient id="beaconGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5AC8FA"/>
+      <stop offset="100%" stop-color="#007AFF"/>
+    </linearGradient>
+
+    <!-- Subtle glow for central beacon -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Transparent background (icon mask applied by macOS) -->
+  <rect width="1024" height="1024" rx="220" fill="none"/>
+
+  <!-- Beacon waves -->
+  <g stroke="url(#beaconGradient)"
+     stroke-width="32"
+     fill="none"
+     opacity="0.85">
+    <circle cx="512" cy="512" r="140"/>
+    <circle cx="512" cy="512" r="260" opacity="0.55"/>
+    <circle cx="512" cy="512" r="380" opacity="0.3"/>
+  </g>
+
+  <!-- Central beacon -->
+  <circle cx="512" cy="512" r="60"
+          fill="url(#beaconGradient)"
+          filter="url(#glow)"/>
+
+</svg>
